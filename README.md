@@ -26,6 +26,10 @@ TDT will Download the contents of a playlist to a folder with it's name
 ## CMD cheat sheet
 * **Serve** website: Runs the uvicorn server with all the functionalities.
     * `python .\src\main.py`
+
+> [!NOTE]  
+> The following commands are mostly for the live demo on github pages, they do not run any function of the app.
+
 * **Build static** website: Tries to render the Jinja2 templates for static hosting.
     * `python .\src\main.py -b`
 * **Build static** website and **serves** it: Tries to render the Jinja2 templates for static hosting then serves locally.

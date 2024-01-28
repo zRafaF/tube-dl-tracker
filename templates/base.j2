@@ -17,7 +17,6 @@
 		{% include 'header.j2' %}
 		<div class="container-md pt-3">{% block content %}{% endblock %}</div>
 		{% include 'sections/messagetoast.j2' %}
-		<script src="{{ url_for('static', path='/bootstrap-5.3.2/js/bootstrap.bundle.min.js') }}"></script>
 		<script src="{{ url_for('static', path='/javascript.js') }}"></script>
 	</body>
 </html>

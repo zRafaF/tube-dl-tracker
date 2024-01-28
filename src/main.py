@@ -66,7 +66,7 @@ async def main():
             port=args.port,
             reload=True,
             reload_includes=["*.html", "*.js", "*.css", "*.png", "*.ico"],
-            reload_excludes=["static/bootstrap-5.3.2", "static/fastbootstrap-2.2.0"],
+            reload_excludes=["static/fastbootstrap-2.2.0"],
         )
     )
 

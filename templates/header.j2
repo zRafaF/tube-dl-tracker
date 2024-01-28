@@ -1,42 +1,99 @@
-<!--
- Copyright (c) 2024 Rafael F. Meneses
- 
- This software is released under the MIT License.
- https://opensource.org/licenses/MIT
--->
-
-
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-    data-bs-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#"><img src="{{ url_for('static', path='/circle-down-solid.svg') }}" width="36" /></a>
-    <div class="collapse navbar-collapse" id="navbarExample">
-      <ul class="navbar-nav me-auto mb-0">
+<header class="navbar navbar-expand-lg py-0 sticky-top bd-navbar">
+  <nav class="container-fluid px-md-3 px-lg-4">
+    <a class="navbar-brand d-inline-flex align-items-center m-0 p-0 me-lg-6 me-xl-9 p-1 rounded text-reset" href="/">
+      <span class="text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" fill-rule="evenodd" width="32" height="32"
+          viewBox="0 0 512 512">
+          <!-- Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+          <path
+            d="M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM376.9 294.6L269.8 394.5c-3.8 3.5-8.7 5.5-13.8 5.5s-10.1-2-13.8-5.5L135.1 294.6c-4.5-4.2-7.1-10.1-7.1-16.3c0-12.3 10-22.3 22.3-22.3l57.7 0 0-96c0-17.7 14.3-32 32-32l32 0c17.7 0 32 14.3 32 32l0 96 57.7 0c12.3 0 22.3 10 22.3 22.3c0 6.2-2.6 12.1-7.1 16.3z" />
+        </svg>
+      </span>
+      <h2 class="d-none d-md-block fw-semibold fs-5 ls-wide ms-2 mb-0">Tube DL Tracker</h2>
+    </a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav navbar-nav-underline ps-lg-5 flex-grow-1">
+        {% for page in globals.pages %}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link {{ 'active' if page.name == current_page }}" href="{{ page.url }}">{{
+            page.name.capitalize()
+            }}</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Team</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+        {% endfor %}
       </ul>
-      <div class="d-flex align-items-center flex-column flex-lg-row">
-        <form class="me-2 mb-2 mb-lg-0">
-          <input type="text" class="form-control form-control-sm" placeholder="Search" />
-        </form>
-        <a class="btn btn-primary" href="">Sign up</a>
-      </div>
     </div>
+    <div class="d-flex align-items-center ms-auto gap-3 me-2 me-lg-3">
+      <button id="search-button"
+        class="pe-40 bg-transparent fs-sm text-body-secondary rounded-2 border border-2 bd-w-56 text-start py-1 ps-2 d-none d-lg-block"
+        type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+        <svg class="me-1" width="16" height="16" viewBox="0 0 24 24" role="presentation">
+          <path
+            d="M16.436 15.085l3.94 4.01a1 1 0 01-1.425 1.402l-3.938-4.006a7.5 7.5 0 111.423-1.406zM10.5 16a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"
+            fill="currentColor" fill-rule="evenodd"></path>
+        </svg>
+        <span>Search</span>
+      </button>
+      <button class="btn d-lg-none" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+        <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
+          <path
+            d="M16.436 15.085l3.94 4.01a1 1 0 01-1.425 1.402l-3.938-4.006a7.5 7.5 0 111.423-1.406zM10.5 16a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"
+            fill="currentColor" fill-rule="evenodd"></path>
+        </svg>
+      </button>
+      <a class="nav-link d-none d-lg-block" href="https://github.com/zRafaF/tube-dl-tracker" title="Github repository"
+        target="_blank" rel="nofollow">
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+          <path
+            d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+            fill="currentColor" fill-rule="evenodd"></path>
+        </svg>
+      </a>
+      <button class="navbar-toggler" type="bdNavbar" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar"
+        aria-controls="bdNavbar" aria-label="Toggle navigation">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
+          </path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+<div class="offcanvas offcanvas-end w-100 mw-100" tabindex="-1" id="bdNavbar">
+  <div class="offcanvas-header border-bottom px-5">
+    <span class="text-primary">
+      <svg fill="currentColor" width="24" height="24" viewBox="0 0 32 32">
+        <rect x="4" y="3" width="24" height="7" rx="3.5" ry="3.5" />
+        <rect x="4" y="12" width="20" height="7" rx="3.5" ry="3.5" />
+        <rect x="4" y="21" width="14" height="7" rx="3.5" ry="3.5" />
+      </svg>
+    </span>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-</nav>
+  <div class="offcanvas-body px-5">
+    <div class="d-flex flex-column">
+      {% for page in globals.pages %}
+      <a class="py-2 fw-bold text-reset" href="{{ page.url }}">{{ page.name.capitalize()
+        }}</a>
+      {% endfor %}
+    </div>
+    <ul class="list-inline mt-3 text-center border-top pt-5">
+      <li>
+        <a class="nav-link rounded-circle" data-bs-toggle="tooltip" data-bs-title="Github repository" href="#">
+          <i class="fa-brands fa-github fa-xl"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<ul class="dropdown-menu dropdown-menu-end" role="menu">
+  <li>
+    <button class="dropdown-item" type="button" id="light-theme-button" data-bs-theme-value="light"><i
+        class="fa-solid fa-sun fa-lg"></i><span class="ms-2">Light</span></button>
+  </li>
+  <li>
+    <button class="dropdown-item" type="button" id="dark-theme-button" data-bs-theme-value="dark"><i
+        class="fa-solid fa-moon fa-lg"></i><span class="ms-2">Dark</span></button>
+  </li>
+</ul>
+{% include 'sections/search.j2' %}

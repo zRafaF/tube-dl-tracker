@@ -1,0 +1,38 @@
+# Copyright (c) 2024 Rafael F. Meneses
+# 
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+name: gh-pages
+on:
+    push:
+        branches:
+            - main
+permissions:
+    contents: write
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v4
+              with:
+                  python-version: 3.11.x
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+            - uses: actions/cache@v2
+              with:
+                  key: ${{ github.ref }}
+                  path: .cache
+            - name: Build
+              run: |
+                  python ./src/main.py -b
+            - name: Deploy
+              uses: peaceiris/actions-gh-pages@v3
+              # If you're changing the branch from main,
+              # also change the `main` in `refs/heads/main`
+              # below accordingly.
+              if: ${{ github.ref == 'refs/heads/main' }}
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./build

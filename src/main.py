@@ -58,7 +58,7 @@ if args.base_url:
     GLOBALS.base_url = args.base_url
 
 if args.build == True or args.static == True:
-    build_static(host=args.host, port=args.port)
+    build_static(args.base_url)
     if args.static == True:
         serve_static(host=args.host, port=args.port)
     exit(0)

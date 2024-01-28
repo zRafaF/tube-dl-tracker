@@ -13,9 +13,9 @@ import subprocess
 import os
 
 
-def build_static(host: str, port: int):
+def build_static(base_url: str):
     client = TestClient(app_fastapi)
-    client.base_url = f"http://{host}{f':{port}' if port  else ''}"
+    client.base_url = base_url
 
     # copy static files, and overwrite if exists
     shutil.copytree("static", "build/static", dirs_exist_ok=True)

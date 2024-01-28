@@ -33,7 +33,7 @@ TDT will Download the contents of a playlist to a folder with it's name
 * **Build static** website: Tries to render the Jinja2 templates for static hosting.
     * `python .\src\main.py -b`
 * **Build static** website and **serves** it: Tries to render the Jinja2 templates for static hosting then serves locally.
-    * `python .\src\main.py -s`
+    * `python .\src\main.py -s --base-url=http://127.0.0.1:8000`
 
 ## About
 

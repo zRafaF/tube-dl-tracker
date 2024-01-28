@@ -4,3 +4,4 @@ site/
 **.pytest_cache
 logs/
 config.json
+build/

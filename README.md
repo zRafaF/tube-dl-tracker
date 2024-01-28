@@ -23,6 +23,14 @@ As you use YouTube and find a video you want to archive simply add it to a track
 
 TDT will Download the contents of a playlist to a folder with it's name
 
+## CMD cheat sheet
+* **Serve** website: Runs the uvicorn server with all the functionalities.
+    * `python .\src\main.py`
+* **Build static** website: Tries to render the Jinja2 templates for static hosting.
+    * `python .\src\main.py -b`
+* **Build static** website and **serves** it: Tries to render the Jinja2 templates for static hosting then serves locally.
+    * `python .\src\main.py -s`
+
 ## About
 
 ### Web ui

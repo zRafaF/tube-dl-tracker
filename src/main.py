@@ -15,6 +15,7 @@ from service import (
     api as service_api,
     scheduler as service_scheduler,
 )
+from build import build_static, serve_static
 
 
 parser = ArgumentParser()
@@ -34,7 +35,25 @@ parser.add_argument(
     default="/tube-dl-tracker",
     help="Specify the root path to run FastAPI app",
 )
+parser.add_argument(
+    "-b",
+    "--build",
+    action="store_true",
+    help="Builds the static website and exits. The website will be available at /build",
+)
+parser.add_argument(
+    "-s",
+    "--static",
+    action="store_true",
+    help="Serve the static website.",
+)
 args = parser.parse_args()
+
+if args.build == True or args.static == True:
+    build_static(host=args.host, port=args.port)
+    if args.static == True:
+        serve_static(host=args.host, port=args.port)
+    exit(0)
 
 
 async def main():

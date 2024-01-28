@@ -21,6 +21,7 @@ templates = Jinja2Templates(directory="templates")
 
 templates.env.globals["globals"] = GLOBALS
 
+
 session = app_rocketry.session
 
 

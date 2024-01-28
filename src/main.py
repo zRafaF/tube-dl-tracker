@@ -1,13 +1,20 @@
 # Copyright (c) 2024 Rafael F. Meneses
-# 
+#
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
+
+from loguru import logger
+logger.add("logs/logs.log", retention=3, rotation="2 MB", level="INFO")
 
 from argparse import ArgumentParser
 import asyncio
 import uvicorn
-from service import core as service_core, api as service_api, scheduler as service_scheduler
-from loguru import logger
+from service import (
+    core as service_core,
+    api as service_api,
+    scheduler as service_scheduler,
+)
+from config import configurator
 
 
 parser = ArgumentParser()
@@ -29,10 +36,10 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+config = configurator
+
 
 async def main():
-    logger.add("logs/logs.log", retention=3, rotation='2 MB', level="INFO")
-
     server = service_core.Server(
         config=uvicorn.Config(
             service_api.app_fastapi,
@@ -42,13 +49,12 @@ async def main():
             port=args.port,
             reload=True,
             reload_includes=["*.html", "*.js", "*.css", "*.png", "*.ico"],
-            reload_excludes=["static/bootstrap-5.3.2","static/fastbootstrap-2.2.0"]
+            reload_excludes=["static/bootstrap-5.3.2", "static/fastbootstrap-2.2.0"],
         )
     )
 
     api_server = asyncio.create_task(server.serve())
     sched = asyncio.create_task(service_scheduler.app_rocketry.serve())
-
     await asyncio.wait([sched, api_server])
 
 

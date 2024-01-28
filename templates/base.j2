@@ -9,7 +9,10 @@
 </head>
 
 <body>
-	{% include 'header.j2' %} {% block content %}{% endblock %}
+	{% include 'header.j2' %}
+	<div class="container-md pt-3">
+		{% block content %}{% endblock %}
+	</div>
 	<script src="{{ url_for('static', path='/bootstrap-5.3.2/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 

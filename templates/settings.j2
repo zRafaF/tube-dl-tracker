@@ -1,0 +1,26 @@
+{% extends 'base.j2' %} {% block content %}
+<form>
+    <div class="row mb-3">
+        <label for="filesPath" class="col-sm-3 col-form-label">Files path</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="filesPath" placeholder="/downloads">
+            <div id="filesPathHelp" class="form-text">Path where the contents will be downloaded to.</div>
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-3 col-form-label">Update Frequency</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input type="number" class="form-control" placeholder="Check for changes every"
+                    aria-label="Check for changes every" aria-describedby="basic-addon2" />
+                <span class="input-group-text" id="basic-addon2">minutes</span>
+
+            </div>
+            <div id="frequencyHelp" class="form-text">Lowering this value may consume extra resources.</div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

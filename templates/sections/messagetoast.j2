@@ -4,9 +4,8 @@
  This software is released under the MIT License.
  https://opensource.org/licenses/MIT
 -->
-{% if globals.messages is defined %}
 <div class="toast-container top-0 end-0 p-3">
-	{% for message in globals.messages %}
+	{% if globals.messages is defined %} {% for message in globals.messages %}
 	<div
 		class="toast text-bg-{{ message.type.value }} fade show"
 		data-bs-delay="3000"
@@ -15,13 +14,17 @@
 	>
 		<div class="toast-body">
 			<div class="d-flex gap-4">
-				<span><i class="fa-solid fa-circle-check fa-lg"></i></span>
 				<div class="d-flex flex-grow-1 align-items-center">
 					<span class="fw-semibold">{{ message.title }}</span>
+					<button
+						type="button"
+						class="btn-close btn-close-white btn-close-sm ms-auto"
+						data-bs-dismiss="toast"
+						aria-label="Close"
+					></button>
 				</div>
 			</div>
 		</div>
 	</div>
-	{% endfor %}
+	{% endfor %} {% endif %}
 </div>
-{% endif %}

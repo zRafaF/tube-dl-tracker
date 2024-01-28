@@ -3,7 +3,7 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-from fastapi import FastAPI, Request, Form
+from fastapi import FastAPI, Request, Form, status
 
 from config.schemas import ConfigBase
 from .scheduler import app_rocketry
@@ -48,7 +48,7 @@ async def get_settings(request: Request):
     )
 
 
-@app_fastapi.post("/settings", response_class=HTMLResponse)
+@app_fastapi.post("/settings", response_class=RedirectResponse)
 async def post_settings(
     request: Request, downloadsPath: str = Form(...), updateFrequency: str = Form(...)
 ):
@@ -57,14 +57,8 @@ async def post_settings(
     )
     messenger.send_message("Updated completed!", MessageType.SUCCESS)
 
-    return templates.TemplateResponse(
-        request=request,
-        name="settings.j2",
-        context={
-            "current_page": "settings",
-            "config": configurator.get_config(),
-        },
-    )
+    # Redirects to the get page so it doesn't triggers a post request again
+    return RedirectResponse(url="/settings", status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app_fastapi.get("/items/{id}", response_class=HTMLResponse)

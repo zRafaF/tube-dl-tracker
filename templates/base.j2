@@ -3,10 +3,12 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>{{ current_page }}</title>
-		<link href="static/styles.css" rel="stylesheet" />
+		<link href="{{ globals.base_url }}static/styles.css" rel="stylesheet" />
 		<link
 			rel="stylesheet"
-			href="static/fastbootstrap-2.2.0/css/fastbootstrap.min.css"
+			href="{{
+				globals.base_url
+			}}static/fastbootstrap-2.2.0/css/fastbootstrap.min.css"
 		/>
 		{% if globals.base_url %}
 		<base href="{{ globals.base_url }}" />
@@ -18,7 +20,9 @@
 		<div class="container-md pt-3">{% block content %}{% endblock %}</div>
 		{% include 'sections/messagetoast.j2' %}
 
-		<script src="static/fastbootstrap-2.2.0/js/fastbootstrap.min.js"></script>
-		<script src="static/javascript.js"></script>
+		<script src="{{
+				globals.base_url
+			}}static/fastbootstrap-2.2.0/js/fastbootstrap.min.js"></script>
+		<script src="{{ globals.base_url }}static/javascript.js"></script>
 	</body>
 </html>

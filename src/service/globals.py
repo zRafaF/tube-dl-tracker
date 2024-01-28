@@ -7,9 +7,9 @@ from .schemas import GlobalsBase, PagesBase
 
 GLOBALS = GlobalsBase(
     pages=[
-        PagesBase(name="home", url=""),
-        PagesBase(name="items", url="items/1"),
-        PagesBase(name="settings", url="settings"),
+        PagesBase(name="Home", url=""),
+        PagesBase(name="Add Playlist", url="add-playlist"),
+        PagesBase(name="Settings", url="settings"),
     ],
     messages=[],
     base_url="/",

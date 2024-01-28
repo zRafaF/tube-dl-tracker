@@ -36,7 +36,7 @@ async def get_tasks():
 @app_fastapi.get("/", response_class=HTMLResponse)
 async def get_root(request: Request):
     return templates.TemplateResponse(
-        request=request, name="home.j2", context={"current_page": "home"}
+        request=request, name="home.j2", context={"current_page": "Home"}
     )
 
 
@@ -45,7 +45,7 @@ async def get_settings(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="settings.j2",
-        context={"current_page": "settings", "config": configurator.get_config()},
+        context={"current_page": "Settings", "config": configurator.get_config()},
     )
 
 
@@ -62,8 +62,10 @@ async def post_settings(
     return RedirectResponse(url="/settings", status_code=status.HTTP_303_SEE_OTHER)
 
 
-@app_fastapi.get("/items/{id}", response_class=HTMLResponse)
-async def get_items(request: Request, id: str):
+@app_fastapi.get("/add-playlist", response_class=HTMLResponse)
+async def get_items(request: Request):
     return templates.TemplateResponse(
-        request=request, name="items.j2", context={"current_page": "items", "id": id}
+        request=request,
+        name="add-playlist.j2",
+        context={"current_page": "Add Playlist"},
     )

@@ -4,6 +4,7 @@
 # https://opensource.org/licenses/MIT
 
 from loguru import logger
+
 logger.add("logs/logs.log", retention=3, rotation="2 MB", level="INFO")
 
 from argparse import ArgumentParser
@@ -14,7 +15,6 @@ from service import (
     api as service_api,
     scheduler as service_scheduler,
 )
-from config import configurator
 
 
 parser = ArgumentParser()
@@ -35,8 +35,6 @@ parser.add_argument(
     help="Specify the root path to run FastAPI app",
 )
 args = parser.parse_args()
-
-config = configurator
 
 
 async def main():

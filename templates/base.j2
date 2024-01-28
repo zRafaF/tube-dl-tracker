@@ -1,19 +1,23 @@
 <html data-bs-theme="dark">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{{ title }}</title>
+		<link
+			href="{{ url_for('static', path='/styles.css') }}"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', path='/fastbootstrap-2.2.0/css/fastbootstrap.min.css') }}"
+		/>
+	</head>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ title }}</title>
-	<link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet" />
-	<link rel="stylesheet" href="{{ url_for('static', path='/fastbootstrap-2.2.0/css/fastbootstrap.min.css') }}" />
-</head>
-
-<body>
-	{% include 'header.j2' %}
-	<div class="container-md pt-3">
-		{% block content %}{% endblock %}
-	</div>
-	<script src="{{ url_for('static', path='/bootstrap-5.3.2/js/bootstrap.bundle.min.js') }}"></script>
-</body>
-
+	<body>
+		{% include 'header.j2' %}
+		<div class="container-md pt-3">{% block content %}{% endblock %}</div>
+		{% include 'sections/messagetoast.j2' %}
+		<script src="{{ url_for('static', path='/bootstrap-5.3.2/js/bootstrap.bundle.min.js') }}"></script>
+		<script src="{{ url_for('static', path='/javascript.js') }}"></script>
+	</body>
 </html>

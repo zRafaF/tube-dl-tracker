@@ -3,7 +3,6 @@
 	"licenser.author": "Rafael F. Meneses",
 	"licenser.license": "MIT",
 	"licenser.projectName": "Tube DL Tracker",
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"prettier.tabWidth": 4,
 	"prettier.useTabs": true,
 	"prettier.singleQuote": true,
@@ -12,11 +11,11 @@
 		"fastbootstrap",
 		"httpx",
 		"loguru",
+		"messagetoast",
 		"templating",
 		"youtube"
 	],
-	"[jinja-html]": {
-		"editor.defaultFormatter": "vscode.html-language-features",
-		"editor.tabSize": 4
+	"files.associations": {
+		"*.j2": "html"
 	}
 }

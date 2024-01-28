@@ -1,0 +1,27 @@
+<!--
+ Copyright (c) 2024 Rafael F. Meneses
+ 
+ This software is released under the MIT License.
+ https://opensource.org/licenses/MIT
+-->
+{% if globals.messages is defined %}
+<div class="toast-container top-0 end-0 p-3">
+	{% for message in globals.messages %}
+	<div
+		class="toast text-bg-{{ message.type.value }} fade show"
+		data-bs-delay="3000"
+		id="messageToast"
+		role="alert"
+	>
+		<div class="toast-body">
+			<div class="d-flex gap-4">
+				<span><i class="fa-solid fa-circle-check fa-lg"></i></span>
+				<div class="d-flex flex-grow-1 align-items-center">
+					<span class="fw-semibold">{{ message.title }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endif %}

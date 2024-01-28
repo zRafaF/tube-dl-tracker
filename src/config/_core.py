@@ -1,5 +1,5 @@
 # Copyright (c) 2024 Rafael F. Meneses
-# 
+#
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
@@ -7,30 +7,37 @@ import json
 from .schemas import ConfigBase
 from loguru import logger
 
+
 class Configurator:
-    def __init__(self, config_file: str = 'config.json'):
+    def __init__(self, config_file: str = "config.json"):
         self._config_file = config_file
         self._config = self._load_config()
+        self.VERSION = "0.0.1"
 
     def get_config(self) -> ConfigBase:
         return self._config
 
     def set_config(self, config: ConfigBase) -> None:
         self._config = config
-        self._save_config(self._config_file, self._config)
+        self._save_config(self._config)
 
     def _load_config(self) -> ConfigBase:
         try:
-            with open(self._config_file, 'r') as file:
+            with open(self._config_file, "r") as file:
                 config_data = json.load(file)
-                logger.success(f"Config file '{self._config_file}' was found, parsing...")
-                config = ConfigBase(filesPath=config_data['filesPath'], updateFrequency=config_data['updateFrequency'])
+                logger.info(f"Config file '{self._config_file}' was found, parsing...")
+                config = ConfigBase(**config_data)
+                logger.success(
+                    f"Config file '{self._config_file}' parsed successfully."
+                )
                 return config
         except FileNotFoundError:
             try:
-                logger.warning(f"Error: File '{self._config_file}' not found. Creating one...")
+                logger.warning(
+                    f"Error: File '{self._config_file}' not found. Creating one..."
+                )
                 config_default = ConfigBase()
-                with open(self._config_file, 'w') as file:
+                with open(self._config_file, "w") as file:
                     json.dump(config_default.__dict__, file, indent=4)
                 logger.success(f"Config file '{self._config_file}' created.")
                 return config_default
@@ -53,8 +60,10 @@ class Configurator:
         if config is None:
             return
         try:
-            with open(self._config_file, 'w') as file:
-                json.dump(config, file, indent=4)
-            logger.success(f"Config saved to {self._config_file} successfully.")
+            with open(self._config_file, "w") as file:
+                json.dump(config.__dict__, file, indent=4)
+                logger.success(f"Config saved to {self._config_file} successfully.")
         except Exception as e:
-            logger.error(f"Error: Unable to save config to {self._config_file}. Reason: {e}")
+            logger.error(
+                f"Error: Unable to save config to {self._config_file}. Reason: {e}"
+            )

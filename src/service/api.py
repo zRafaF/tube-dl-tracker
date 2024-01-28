@@ -10,8 +10,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 
 app_fastapi = FastAPI()
-app_fastapi.mount("/static", StaticFiles(directory="src/static"), name="static")
-templates = Jinja2Templates(directory="src/templates")
+app_fastapi.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
 session = app_rocketry.session
 
@@ -24,15 +24,15 @@ async def get_tasks():
     return session.tasks
 
 
-@app_fastapi.get("/")
+@app_fastapi.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    return {
-        "message": "Hello World",
-    }
+    return templates.TemplateResponse(
+        request=request, name="home.j2", context={"id": id}
+    )
 
 
 @app_fastapi.get("/items/{id}", response_class=HTMLResponse)
 async def read_item(request: Request, id: str):
     return templates.TemplateResponse(
-        request=request, name="item.html", context={"id": id}
+        request=request, name="item.j2", context={"id": id}
     )

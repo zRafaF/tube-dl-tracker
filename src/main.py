@@ -7,7 +7,6 @@ from argparse import ArgumentParser
 import asyncio
 import uvicorn
 from service import core as service_core, api as service_api, scheduler as service_scheduler
-import httpx
 from loguru import logger
 
 
@@ -43,7 +42,7 @@ async def main():
             port=args.port,
             reload=True,
             reload_includes=["*.html", "*.js", "*.css", "*.png", "*.ico"],
-            reload_excludes=["src/static/bootstrap-5.3.2-dist"]
+            reload_excludes=["static/bootstrap-5.3.2","static/fastbootstrap-2.2.0"]
         )
     )
 

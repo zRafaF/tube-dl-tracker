@@ -22,3 +22,9 @@ As you use YouTube and find a video you want to archive simply add it to a track
 ## Downloaded content
 
 TDT will Download the contents of a playlist to a folder with it's name
+
+## About
+
+### Web ui
+
+Powered by FastAPI, and using [FastBootstrap](https://fastbootstrap.com/) for styling.

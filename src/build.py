@@ -15,7 +15,10 @@ import os
 
 def build_static(host: str, port: int):
     client = TestClient(app_fastapi)
-    client.base_url = f"http://{host}:{port}"
+    client.base_url = f"http://{host}{f':{port}' if port  else ''}"
+
+    # copy static files, and overwrite if exists
+    shutil.copytree("static", "build/static", dirs_exist_ok=True)
 
     for page in GLOBALS.pages:
         response = client.get(page.url)
@@ -32,9 +35,6 @@ def build_static(host: str, port: int):
 
 
 def serve_static(host: str, port: int):
-    # copy static files, and overwrite if exists
-    shutil.copytree("static", "build/static", dirs_exist_ok=True)
-
     # run cmd on host and port
     subprocess.run(
         [

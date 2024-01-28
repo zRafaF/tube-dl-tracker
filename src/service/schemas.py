@@ -30,10 +30,11 @@ class GlobalsBase(BaseModel):
         Field(
             ...,
             example=[
-                {"name": "home", "url": "/"},
+                {"name": "home", "url": ""},
                 {"name": "items", "url": "items/1"},
-                {"name": "settings", "url": "/settings"},
+                {"name": "settings", "url": "settings"},
             ],
         ),
     )
     messages: list[MessagesBase] = []
+    base_url: str = Field(..., example="/")

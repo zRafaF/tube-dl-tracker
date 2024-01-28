@@ -11,6 +11,9 @@
 			rel="stylesheet"
 			href="{{ url_for('static', path='/fastbootstrap-2.2.0/css/fastbootstrap.min.css') }}"
 		/>
+		{% if globals.base_url %}
+		<base href="{{ globals.base_url }}" />
+		{% endif %}
 	</head>
 
 	<body>

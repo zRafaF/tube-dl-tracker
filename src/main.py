@@ -16,7 +16,7 @@ from service import (
     scheduler as service_scheduler,
 )
 from build import build_static, serve_static
-
+from service.globals import GLOBALS
 
 parser = ArgumentParser()
 parser.add_argument(
@@ -36,6 +36,11 @@ parser.add_argument(
     help="Specify the root path to run FastAPI app",
 )
 parser.add_argument(
+    "--base-url",
+    default="/",
+    help="Specify the base path of ulr for the web ui. This is useful when running behind a reverse proxy.",
+)
+parser.add_argument(
     "-b",
     "--build",
     action="store_true",
@@ -48,6 +53,9 @@ parser.add_argument(
     help="Serve the static website.",
 )
 args = parser.parse_args()
+
+if args.base_url:
+    GLOBALS.base_url = args.base_url
 
 if args.build == True or args.static == True:
     build_static(host=args.host, port=args.port)

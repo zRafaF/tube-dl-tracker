@@ -26,7 +26,7 @@ def build_static(host: str, port: int):
         if page.name == "home":
             path = f"build/index.html"
         else:
-            path = f"build/{page.name}/index.html"
+            path = f"build/{page.url}/index.html"
 
         os.makedirs(os.path.dirname(path), exist_ok=True)
 

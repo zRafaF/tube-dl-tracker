@@ -1,7 +1,12 @@
-{% extends 'base.j2' %} {% block content %}
+{% extends 'base.j2' %} {% block content %} {% if playlist is defined %}
+<small>
+	{{ playlist.id }}
+</small>
+<h1>Edit playlist</h1>
+
 <div class="d-flex">
 	<div>
-		<h1>Playlist title</h1>
+		<h1>{{ playlist.title }}</h1>
 		<p>Playlist thumbnail</p>
 		<p>Playlist description</p>
 		<hr />
@@ -44,4 +49,6 @@
 		</li>
 	</ul>
 </div>
-{% endblock %}
+{% else %}
+<h1>ERROR: Playlist is not defined.</h1>
+{% endif %} {% endblock %}

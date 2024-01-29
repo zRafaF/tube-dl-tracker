@@ -14,6 +14,7 @@ from .schemas import *
 from config import configurator
 from .globals import GLOBALS
 from .messages import messenger
+from .helpers import extract_list_id
 
 app_fastapi = FastAPI()
 app_fastapi.mount("/static", StaticFiles(directory="static"), name="static")
@@ -62,10 +63,29 @@ async def post_settings(
     return RedirectResponse(url="/settings", status_code=status.HTTP_303_SEE_OTHER)
 
 
-@app_fastapi.get("/add-playlist", response_class=HTMLResponse)
-async def get_items(request: Request):
+@app_fastapi.get("/add-playlist/{id}", response_class=HTMLResponse)
+async def get_items(request: Request, id: str):
+    playlist = PlaylistBase(id=id, title="Test", url="Test", thumbnail_url="Test")
+    messenger.send_message("Playlist data fetched successfully!", MessageType.SUCCESS)
+
     return templates.TemplateResponse(
         request=request,
         name="add-playlist.j2",
-        context={"current_page": "Add Playlist"},
+        context={"current_page": "Add Playlist", "playlist": playlist},
+    )
+
+
+@app_fastapi.post("/api/submit-url", response_class=RedirectResponse)
+async def get_items(request: Request, submittedUrl: str = Form(...)):
+    id = extract_list_id(submittedUrl)
+
+    if id is None:
+        messenger.send_message(
+            f"Invalid playlist URL, couldn't find list id.", MessageType.DANGER
+        )
+        return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
+
+    return RedirectResponse(
+        url=f"/add-playlist/{id}",
+        status_code=status.HTTP_303_SEE_OTHER,
     )

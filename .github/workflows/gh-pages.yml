@@ -26,7 +26,7 @@ jobs:
                   path: .cache
             - name: Build
               run: |
-                  python ./src/main.py -b --base-url=https://zrafaf.github.io/tube-dl-tracker/
+                  python ./src/main.py -b -d --base-url=https://zrafaf.github.io/tube-dl-tracker/
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3
               # If you're changing the branch from main,

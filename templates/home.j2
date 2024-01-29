@@ -1,15 +1,22 @@
 {% extends 'base.j2' %} {% block before_content %}
 <div class="bg-light-subtle d-flex">
-	<form class="d-flex w-100 mx-auto flex-column my-6 max-w-2xl px-3">
+	<form
+		class="d-flex w-100 mx-auto flex-column my-6 max-w-2xl px-3"
+		action="/api/submit-url"
+		method="POST"
+		enctype="multipart/form-data"
+	>
 		<h1 class="fw-semibold fs-2 mx-auto mb-6">Add new playlist</h1>
 		<div class="d-flex">
 			<div class="input-group">
 				<div class="input-group-text">http(s)://</div>
 				<input
-					type="url"
+					type="text"
 					class="form-control"
-					id="addNewPlaylistUrlInput"
+					id="submittedUrl"
 					placeholder="youtube.com/playlist?list="
+					name="submittedUrl"
+					required
 				/>
 				<button type="submit" class="btn btn-warning">
 					Submit URL
@@ -24,16 +31,11 @@
 {% endblock %} {% block after_content %}
 
 <script>
-	const addNewPlaylistUrlInput = document.getElementById(
-		'addNewPlaylistUrlInput'
-	);
+	const submittedUrl = document.getElementById('submittedUrl');
 
-	addNewPlaylistUrlInput.addEventListener('input', () => {
-		console.log(addNewPlaylistUrlInput.value);
-		addNewPlaylistUrlInput.value = addNewPlaylistUrlInput.value.replace(
-			/^(https?:\/\/)?/i,
-			''
-		);
+	submittedUrl.addEventListener('input', () => {
+		console.log(submittedUrl.value);
+		submittedUrl.value = submittedUrl.value.replace(/^(https?:\/\/)?/i, '');
 	});
 </script>
 

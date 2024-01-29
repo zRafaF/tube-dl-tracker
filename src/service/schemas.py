@@ -31,3 +31,10 @@ class GlobalsBase(BaseModel):
     messages: list[MessagesBase] = []
     base_url: str = Field(..., example="/")
     demo_mode: bool = Field(..., example=True)
+
+
+class PlaylistBase(BaseModel):
+    id: str = Field(...)
+    title: str = Field(...)
+    url: str = Field(...)
+    thumbnail_url: str = Field(...)

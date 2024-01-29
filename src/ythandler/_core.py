@@ -15,17 +15,25 @@ import re
 from functools import cache
 from loguru import logger
 import time
+import asyncio
 
 
 class YTHandler:
     def __init__(self):
         pass
 
+    async def _invalidate_cache(self):
+        await asyncio.sleep(60)
+        self.get_playlist_info.cache_clear()
+        self.get_video_info.cache_clear()
+
     @cache
     def get_playlist_info(
         self, playlist_id: str
     ) -> Tuple[RawExtractedPlaylistBase, float]:
         start = time.time()
+        asyncio.create_task(self._invalidate_cache())
+
         ydl_opts = {"extract_flat": True, "verbose": True}
         with YoutubeDL(ydl_opts) as ydl:
             playlist_dict = ydl.extract_info(
@@ -38,11 +46,12 @@ class YTHandler:
             )
             return (extracted_playlist, execution_time)
 
+    @cache
     def get_video_info(
         self, video_id: str, max_comments: int = 10
     ) -> RawExtractedVideoBase:
         start = time.time()
-
+        asyncio.create_task(self._invalidate_cache())
         ydl_opts = {
             "extract_flat": True,
             "verbose": True,

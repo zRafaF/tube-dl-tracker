@@ -23,6 +23,7 @@ class YTHandler:
         pass
 
     async def _invalidate_cache(self):
+        # return
         await asyncio.sleep(60)
         self.get_playlist_info.cache_clear()
         self.get_video_info.cache_clear()

@@ -14,8 +14,8 @@
 	</head>
 
 	<body>
-		<header class="navbar navbar-expand-lg py-0 sticky-top bd-navbar">
-	<nav class="container-fluid px-md-3 px-lg-4">
+		 <header class="navbar navbar-expand-md py-0 sticky-top bd-navbar">
+	<nav class="container-fluid px-md-2 px-lg-3">
 		<a
 			class="navbar-brand d-inline-flex align-items-center m-0 p-0 me-lg-6 me-xl-9 p-1 rounded text-reset"
 			href=""
@@ -23,15 +23,14 @@
 			<span class="text-primary">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					fill="currentColor"
+					fill="white"
 					fill-rule="evenodd"
-					width="32"
-					height="32"
+					width="28"
+					height="28"
 					viewBox="0 0 512 512"
 				>
-					<!-- Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
 					<path
-						d="M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM376.9 294.6L269.8 394.5c-3.8 3.5-8.7 5.5-13.8 5.5s-10.1-2-13.8-5.5L135.1 294.6c-4.5-4.2-7.1-10.1-7.1-16.3c0-12.3 10-22.3 22.3-22.3l57.7 0 0-96c0-17.7 14.3-32 32-32l32 0c17.7 0 32 14.3 32 32l0 96 57.7 0c12.3 0 22.3 10 22.3 22.3c0 6.2-2.6 12.1-7.1 16.3z"
+						d="M256 464a208 208 0 1 1 0-416 208 208 0 1 1 0 416zM256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zM376.9 294.6c4.5-4.2 7.1-10.1 7.1-16.3c0-12.3-10-22.3-22.3-22.3H304V160c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32v96H150.3C138 256 128 266 128 278.3c0 6.2 2.6 12.1 7.1 16.3l107.1 99.9c3.8 3.5 8.7 5.5 13.8 5.5s10.1-2 13.8-5.5l107.1-99.9z"
 					/>
 				</svg>
 			</span>
@@ -39,7 +38,7 @@
 		</a>
 		<div class="collapse navbar-collapse">
 			<ul class="navbar-nav navbar-nav-underline ps-lg-5 flex-grow-1">
-				
+				 
 				<li class="nav-item">
 					<a
 						class="nav-link active"
@@ -47,15 +46,7 @@
 						>Home</a
 					>
 				</li>
-				
-				<li class="nav-item">
-					<a
-						class="nav-link "
-						href="add-playlist"
-						>Add playlist</a
-					>
-				</li>
-				
+				    
 				<li class="nav-item">
 					<a
 						class="nav-link "
@@ -63,7 +54,7 @@
 						>Settings</a
 					>
 				</li>
-				
+				 
 			</ul>
 		</div>
 		<div class="d-flex align-items-center ms-auto gap-3 me-2 me-lg-3">
@@ -116,8 +107,8 @@
 				rel="nofollow"
 			>
 				<svg
-					width="24"
-					height="24"
+					width="28"
+					height="28"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 496 512"
 				>
@@ -227,32 +218,83 @@
 	</li>
 </ul>
 <div class="modal fade" tabindex="-1" id="searchModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header px-3 py-2">
-                <div class="input-group input-group-prefix">
-                    <input type="text" id="search-input" name="search-input" class="form-control bg-transparent py-3"
-                        placeholder="Search content" />
-                    <label class="input-group-text">
-                        <svg class="me-1" width="20" height="20" viewBox="0 0 24 24" role="presentation">
-                            <path
-                                d="M16.436 15.085l3.94 4.01a1 1 0 01-1.425 1.402l-3.938-4.006a7.5 7.5 0 111.423-1.406zM10.5 16a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"
-                                fill="currentColor" fill-rule="evenodd">
-                            </path>
-                        </svg>
-                    </label>
-                </div>
-            </div>
-            <div class="modal-body p-3 pt-0"></div>
-        </div>
-    </div>
+	<header class="navbar visually-hidden"></header>
+	<div class="modal-dialog modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header px-3 py-2">
+				<div class="input-group input-group-prefix">
+					<input
+						type="text"
+						id="search-input"
+						name="search-input"
+						class="form-control bg-transparent py-3"
+						placeholder="Search content"
+					/>
+					<label class="input-group-text">
+						<svg
+							class="me-1"
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							role="presentation"
+						>
+							<path
+								d="M16.436 15.085l3.94 4.01a1 1 0 01-1.425 1.402l-3.938-4.006a7.5 7.5 0 111.423-1.406zM10.5 16a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"
+								fill="currentColor"
+								fill-rule="evenodd"
+							></path>
+						</svg>
+					</label>
+				</div>
+			</div>
+			<div class="modal-body p-3 pt-0"></div>
+		</div>
+	</div>
+</div> 
+<div class="bg-light-subtle d-flex">
+	<form class="d-flex w-100 mx-auto flex-column my-6 max-w-2xl px-3">
+		<h1 class="fw-semibold fs-2 mx-auto mb-6">Add new playlist</h1>
+		<div class="d-flex">
+			<div class="input-group">
+				<div class="input-group-text">http(s)://</div>
+				<input
+					type="url"
+					class="form-control"
+					id="addNewPlaylistUrlInput"
+					placeholder="youtube.com/playlist?list="
+				/>
+				<button type="submit" class="btn btn-warning">
+					Submit URL
+				</button>
+			</div>
+		</div>
+	</form>
 </div>
-		<div class="container-md pt-3">
+
+
+		<div class="container-md py-4">
+
 <p>Teste</p>
 </div>
+
 		<div class="toast-container top-0 end-0 p-3">
 	  
-</div>
+</div> 
+
+<script>
+	const addNewPlaylistUrlInput = document.getElementById(
+		'addNewPlaylistUrlInput'
+	);
+
+	addNewPlaylistUrlInput.addEventListener('input', () => {
+		console.log(addNewPlaylistUrlInput.value);
+		addNewPlaylistUrlInput.value = addNewPlaylistUrlInput.value.replace(
+			/^(https?:\/\/)?/i,
+			''
+		);
+	});
+</script>
+
 
 		<script src="https://zrafaf.github.io/tube-dl-tracker/static/fastbootstrap-2.2.0/js/fastbootstrap.min.js"></script>
 		<script src="https://zrafaf.github.io/tube-dl-tracker/static/javascript.js"></script>

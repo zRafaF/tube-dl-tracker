@@ -10,6 +10,7 @@ from enum import Enum
 class PagesBase(BaseModel):
     name: str = Field(..., example="home")
     url: str = Field(..., example="/")
+    on_navbar: bool = False
 
 
 class MessageType(str, Enum):
@@ -26,15 +27,7 @@ class MessagesBase(BaseModel):
 
 
 class GlobalsBase(BaseModel):
-    pages: list[PagesBase] = (
-        Field(
-            ...,
-            example=[
-                {"name": "home", "url": ""},
-                {"name": "items", "url": "items/1"},
-                {"name": "settings", "url": "settings"},
-            ],
-        ),
-    )
+    pages: list[PagesBase] = Field(...)
     messages: list[MessagesBase] = []
     base_url: str = Field(..., example="/")
+    demo_mode: bool = Field(..., example=True)

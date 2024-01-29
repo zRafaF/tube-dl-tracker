@@ -6,7 +6,7 @@
 
 class ConfigBase:
     def __init__(
-        self, downloadsPath: str = "/downloads", updateFrequency: float = 30.0
+        self, downloadsPath: str = "/downloads", updateFrequency: float = 15.0
     ):
         self.downloadsPath = downloadsPath
         self.updateFrequency = updateFrequency

@@ -1,3 +1,40 @@
-{% extends 'base.j2' %} {% block content %}
+{% extends 'base.j2' %} {% block before_content %}
+<div class="bg-light-subtle d-flex">
+	<form class="d-flex w-100 mx-auto flex-column my-6 max-w-2xl px-3">
+		<h1 class="fw-semibold fs-2 mx-auto mb-6">Add new playlist</h1>
+		<div class="d-flex">
+			<div class="input-group">
+				<div class="input-group-text">http(s)://</div>
+				<input
+					type="url"
+					class="form-control"
+					id="addNewPlaylistUrlInput"
+					placeholder="youtube.com/playlist?list="
+				/>
+				<button type="submit" class="btn btn-warning">
+					Submit URL
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %} {% block content %}
+
 <p>Teste</p>
+{% endblock %} {% block after_content %}
+
+<script>
+	const addNewPlaylistUrlInput = document.getElementById(
+		'addNewPlaylistUrlInput'
+	);
+
+	addNewPlaylistUrlInput.addEventListener('input', () => {
+		console.log(addNewPlaylistUrlInput.value);
+		addNewPlaylistUrlInput.value = addNewPlaylistUrlInput.value.replace(
+			/^(https?:\/\/)?/i,
+			''
+		);
+	});
+</script>
+
 {% endblock %}

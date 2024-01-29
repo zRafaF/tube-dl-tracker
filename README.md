@@ -31,9 +31,9 @@ TDT will Download the contents of a playlist to a folder with it's name
 > The following commands are mostly for the live demo on github pages, they do not run any function of the app.
 
 * **Build static** website: Tries to render the Jinja2 templates for static hosting.
-    * `python .\src\main.py -b`
+    * `python .\src\main.py -b -d`
 * **Build static** website and **serves** it: Tries to render the Jinja2 templates for static hosting then serves locally.
-    * `python .\src\main.py -s --base-url=http://127.0.0.1:8000`
+    * `python .\src\main.py -s -d --base-url=http://127.0.0.1:8000`
 
 ## About
 

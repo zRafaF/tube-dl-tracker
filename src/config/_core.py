@@ -6,6 +6,7 @@
 import json
 from .schemas import ConfigBase
 from loguru import logger
+from .arguments import args
 
 
 class Configurator:
@@ -36,7 +37,7 @@ class Configurator:
                 logger.warning(
                     f"Error: File '{self._config_file}' not found. Creating one..."
                 )
-                config_default = ConfigBase()
+                config_default = ConfigBase(args.downloads_path, float(args.freq))
                 with open(self._config_file, "w") as file:
                     json.dump(config_default.__dict__, file, indent=4)
                 logger.success(f"Config file '{self._config_file}' created.")

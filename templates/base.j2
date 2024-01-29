@@ -16,10 +16,14 @@
 	</head>
 
 	<body>
-		{% include 'header.j2' %}
-		<div class="container-md pt-3">{% block content %}{% endblock %}</div>
-		{% include 'sections/messagetoast.j2' %}
+		{% if globals.demo_mode %} {% include 'sections/demo-badge.j2' %} {%
+		endif %} {% include 'header.j2' %} {% block before_content %}{% endblock
+		%}
 
+		<div class="container-md py-4">{% block content %}{% endblock %}</div>
+
+		{% include 'sections/message-toast.j2' %} {% block after_content %}{%
+		endblock %}
 		<script src="{{
 				globals.base_url
 			}}static/fastbootstrap-2.2.0/js/fastbootstrap.min.js"></script>

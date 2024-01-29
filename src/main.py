@@ -7,7 +7,6 @@ from loguru import logger
 
 logger.add("logs/logs.log", retention=3, rotation="2 MB", level="INFO")
 
-from argparse import ArgumentParser
 import asyncio
 import uvicorn
 from service import (
@@ -17,54 +16,27 @@ from service import (
 )
 from build import build_static, serve_static
 from service.globals import GLOBALS
-
-parser = ArgumentParser()
-parser.add_argument(
-    "--freq",
-    default="0.1",
-    help="Frequency (in minutes) for the tracker to check for new content",
-)
-parser.add_argument(
-    "--host", default="127.0.0.1", help="Specify the host to run the web ui"
-)
-parser.add_argument(
-    "--port", type=int, default=8000, help="Specify the port for the web ui"
-)
-parser.add_argument(
-    "--path",
-    default="/tube-dl-tracker",
-    help="Specify the root path to run FastAPI app",
-)
-parser.add_argument(
-    "--base-url",
-    default="/",
-    help="Specify the base path of ulr for the web ui. This is useful when running behind a reverse proxy.",
-)
-parser.add_argument(
-    "-b",
-    "--build",
-    action="store_true",
-    help="Builds the static website and exits. The website will be available at /build",
-)
-parser.add_argument(
-    "-s",
-    "--static",
-    action="store_true",
-    help="Serve the static website.",
-)
-args = parser.parse_args()
+from config.arguments import args
 
 if args.base_url:
     GLOBALS.base_url = args.base_url
+    logger.info(f"Base url set to {GLOBALS.base_url}")
+
+if args.demo == True:
+    GLOBALS.demo_mode = True
+    logger.info("Demo mode enabled")
 
 if args.build == True or args.static == True:
+    logger.info("Building static website...")
     build_static(host=args.host, port=args.port)
     if args.static == True:
+        logger.info("Serving static website...")
         serve_static(host=args.host, port=args.port)
     exit(0)
 
 
 async def main():
+    logger.info("Starting server...")
     server = service_core.Server(
         config=uvicorn.Config(
             service_api.app_fastapi,

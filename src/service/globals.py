@@ -7,10 +7,11 @@ from .schemas import GlobalsBase, PagesBase
 
 GLOBALS = GlobalsBase(
     pages=[
-        PagesBase(name="Home", url=""),
+        PagesBase(name="Home", url="", on_navbar=True),
         PagesBase(name="Add Playlist", url="add-playlist"),
-        PagesBase(name="Settings", url="settings"),
+        PagesBase(name="Settings", url="settings", on_navbar=True),
     ],
     messages=[],
     base_url="/",
+    demo_mode=False,
 )

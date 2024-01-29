@@ -1,49 +1,103 @@
 {% extends 'base.j2' %} {% block content %}
-<form method="POST" enctype="multipart/form-data">
-	<div class="row mb-3">
-		<label for="downloadsPath" class="col-sm-3 col-form-label"
-			>Downloads Path</label
-		>
-		<div class="col-sm-8">
-			<input
-				type="text"
-				class="form-control"
-				id="downloadsPath"
-				name="downloadsPath"
-				placeholder="/downloads"
-				value="{{ config.downloadsPath if config is defined }}"
-			/>
-			<div id="downloadsPathHelp" class="form-text">
-				Path where the contents will be downloaded to.
+<div>
+	<h2 class="fw-semibold fs-2 mx-auto mb-6">Settings</h2>
+	<form method="POST" enctype="multipart/form-data">
+		<div class="row mb-3">
+			<label for="downloadsPath" class="col-sm-3 col-form-label"
+				>Downloads Path</label
+			>
+			<div class="col-sm-8">
+				<input
+					type="text"
+					class="form-control"
+					id="downloadsPath"
+					name="downloadsPath"
+					placeholder="/downloads"
+					value="{{ config.downloadsPath if config is defined }}"
+				/>
+				<div id="downloadsPathHelp" class="form-text">
+					Path where the contents will be downloaded to.
+				</div>
 			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="updateFrequency" class="col-sm-3 col-form-label"
+				>Update Frequency</label
+			>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input
+						id="updateFrequency"
+						name="updateFrequency"
+						type="number"
+						min="0"
+						class="form-control"
+						placeholder="Check for changes every"
+						aria-label="Check for changes every"
+						step="any"
+						value="{{ config.updateFrequency if config is defined }}"
+					/>
+					<span class="input-group-text" id="basic-addon2"
+						>minutes</span
+					>
+				</div>
+				<div id="frequencyHelp" class="form-text">
+					Lower values may consume extra resources.
+				</div>
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+</div>
+
+<hr class="my-6" />
+
+<div>
+	<h2 class="fw-semibold fs-2 mx-auto mb-6">More options</h2>
+
+	<div class="row mb-3">
+		<label for="updateFrequency" class="col-sm-3 col-form-label"
+			>Re-index</label
+		>
+
+		<div class="col-sm-8">
+			<div class="input-group">
+				<button class="btn btn-warning">Force re-index</button>
+			</div>
+			<div id="reindexHelp" class="form-text">
+				Forces the DB to re-index all the contents on downloadsPath.
+			</div>
+		</div>
+	</div>
+</div>
+
+<hr class="my-6" />
+<div>
+	<h2 class="fw-semibold fs-2 mx-auto mb-6">About</h2>
+
+	<div class="row mb-3">
+		<label for="updateFrequency" class="col-sm-3 col-form-label"
+			>Tube DL Tracker version</label
+		>
+
+		<div class="col-sm-8">
+			{% if config is defined %}
+			{{ 'DEMO' if globals.demo_mode else globals.app_version }} {% else
+			%} N/A {% endif %}
 		</div>
 	</div>
 	<div class="row mb-3">
 		<label for="updateFrequency" class="col-sm-3 col-form-label"
-			>Update Frequency</label
+			><a href="https://github.com/yt-dlp/yt-dlp">yt_dlp</a>
+			version</label
 		>
+
 		<div class="col-sm-8">
-			<div class="input-group">
-				<input
-					id="updateFrequency"
-					name="updateFrequency"
-					type="number"
-					min="0"
-					class="form-control"
-					placeholder="Check for changes every"
-					aria-label="Check for changes every"
-					step="any"
-					value="{{ config.updateFrequency if config is defined }}"
-				/>
-				<span class="input-group-text" id="basic-addon2">minutes</span>
-			</div>
-			<div id="frequencyHelp" class="form-text">
-				Lower values may consume extra resources.
-			</div>
+			{% if config is defined %} {{ globals.yt_dlp_version }} {% else %}
+			N/A {% endif %}
 		</div>
 	</div>
-	<button type="submit" class="btn btn-primary">Save</button>
-	<button class="btn btn-secondary">Force re-index</button>
-</form>
+</div>
 
 {% endblock %}

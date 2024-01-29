@@ -31,6 +31,8 @@ class GlobalsBase(BaseModel):
     messages: list[MessagesBase] = []
     base_url: str = Field(..., example="/")
     demo_mode: bool = Field(..., example=True)
+    app_version: str = Field(..., example="0.1.0")
+    yt_dlp_version: str = Field(..., example="0.1.0")
 
 
 class PlaylistBase(BaseModel):

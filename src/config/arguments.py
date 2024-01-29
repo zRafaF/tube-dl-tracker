@@ -15,7 +15,6 @@ parser.add_argument(
     default="/downloads",
     help="[Initial setup only] Path to download the contents. Default: /downloads",
 )
-
 parser.add_argument(
     "--host",
     default="127.0.0.1",

@@ -3,7 +3,7 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 from .schemas import GlobalsBase, PagesBase
-
+from importlib.metadata import version
 
 GLOBALS = GlobalsBase(
     pages=[
@@ -14,4 +14,6 @@ GLOBALS = GlobalsBase(
     messages=[],
     base_url="/",
     demo_mode=False,
+    app_version="0.1.0",
+    yt_dlp_version=version("yt_dlp"),
 )

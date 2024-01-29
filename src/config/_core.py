@@ -7,10 +7,11 @@ import json
 from .schemas import ConfigBase
 from loguru import logger
 from .arguments import args
+import os
 
 
 class Configurator:
-    def __init__(self, config_file: str = "config.json"):
+    def __init__(self, config_file: str = "app-data/config.json"):
         self._config_file = config_file
         self._config = self._load_config()
         self.VERSION = "0.0.1"
@@ -37,7 +38,12 @@ class Configurator:
                 logger.warning(
                     f"Error: File '{self._config_file}' not found. Creating one..."
                 )
-                config_default = ConfigBase(args.downloads_path, float(args.freq))
+                config_default = ConfigBase(
+                    downloadsPath=args.downloads_path,
+                    updateFrequency=float(args.freq),
+                )
+                os.makedirs(os.path.dirname(self._config_file), exist_ok=True)
+
                 with open(self._config_file, "w") as file:
                     json.dump(config_default.__dict__, file, indent=4)
                 logger.success(f"Config file '{self._config_file}' created.")

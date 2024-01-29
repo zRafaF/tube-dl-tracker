@@ -12,6 +12,7 @@
 		"httpx",
 		"loguru",
 		"messagetoast",
+		"pydantic",
 		"templating",
 		"youtube"
 	],

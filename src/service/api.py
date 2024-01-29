@@ -6,6 +6,7 @@
 from fastapi import FastAPI, Request, Form, status
 
 from config.schemas import ConfigBase
+from ythandler.raw_schemas import RawExtractedPlaylistBase
 from .scheduler import app_rocketry
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -14,7 +15,7 @@ from .schemas import *
 from config import configurator
 from .globals import GLOBALS
 from .messages import messenger
-from .helpers import extract_list_id
+from ythandler import yt_handler
 
 app_fastapi = FastAPI()
 app_fastapi.mount("/static", StaticFiles(directory="static"), name="static")
@@ -65,8 +66,12 @@ async def post_settings(
 
 @app_fastapi.get("/add-playlist/{id}", response_class=HTMLResponse)
 async def get_items(request: Request, id: str):
-    playlist = PlaylistBase(id=id, title="Test", url="Test", thumbnail_url="Test")
-    messenger.send_message("Playlist data fetched successfully!", MessageType.SUCCESS)
+    (playlist, execution_time) = yt_handler.get_playlist_info(id)
+
+    messenger.send_message(
+        f"Playlist data fetched successfully! Took {execution_time:.2f}s.",
+        MessageType.SUCCESS,
+    )
 
     return templates.TemplateResponse(
         request=request,
@@ -77,7 +82,7 @@ async def get_items(request: Request, id: str):
 
 @app_fastapi.post("/api/submit-url", response_class=RedirectResponse)
 async def get_items(request: Request, submittedUrl: str = Form(...)):
-    id = extract_list_id(submittedUrl)
+    id = yt_handler.extract_playlist_id_from_url(submittedUrl)
 
     if id is None:
         messenger.send_message(

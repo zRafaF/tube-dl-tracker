@@ -6,8 +6,10 @@
 
 <div class="d-flex">
 	<div>
-		<h1>{{ playlist.title }}</h1>
-		<p>Playlist thumbnail</p>
+		<h1>
+			<a href="{{ playlist.url }}"> {{ playlist.title }}</a>
+		</h1>
+		<img src="{{ playlist.thumbnails[0].url }}" alt="thumbnail" />
 		<p>Playlist description</p>
 		<hr />
 		<p>Download quality</p>
@@ -17,36 +19,17 @@
 		<button type="submit" class="btn btn-primary">Done</button>
 	</div>
 	<ul class="ps-40">
+		{% for video in playlist.videos %}
 		<li>
 			<div>
-				<h3>Video title</h3>
+				<h3>{{ video.title }}</h3>
+				<img src="{{ video.thumbnails[0].url }}" alt="thumbnail" />
+
 				<p>video info</p>
+				<small>{{ video.uploader }}</small>
 			</div>
 		</li>
-		<li>
-			<div>
-				<h3>Video title</h3>
-				<p>video info</p>
-			</div>
-		</li>
-		<li>
-			<div>
-				<h3>Video title</h3>
-				<p>video info</p>
-			</div>
-		</li>
-		<li>
-			<div>
-				<h3>Video title</h3>
-				<p>video info</p>
-			</div>
-		</li>
-		<li>
-			<div>
-				<h3>Video title</h3>
-				<p>video info</p>
-			</div>
-		</li>
+		{% endfor %}
 	</ul>
 </div>
 {% else %}

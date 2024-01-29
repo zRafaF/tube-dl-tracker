@@ -9,6 +9,8 @@ class ConfigBase:
         self,
         downloadsPath: str = "/downloads",
         updateFrequency: float = 15.0,
+        maxComments: int = 500,
     ):
         self.downloadsPath = downloadsPath
         self.updateFrequency = updateFrequency
+        self.maxComments = maxComments

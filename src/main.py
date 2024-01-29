@@ -5,13 +5,14 @@
 
 from loguru import logger
 
+from service import api as service_api
+
 logger.add("logs/logs.log", retention=3, rotation="2 MB", level="INFO")
 
 import asyncio
 import uvicorn
 from service import (
     core as service_core,
-    api as service_api,
     scheduler as service_scheduler,
 )
 from build import build_static, serve_static

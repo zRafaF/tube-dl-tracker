@@ -5,6 +5,7 @@
 		action="/api/submit-url"
 		method="POST"
 		enctype="multipart/form-data"
+		id="submitUrlForm"
 	>
 		<h1 class="fw-semibold fs-2 mx-auto mb-6">Track new playlist</h1>
 		<div class="d-flex">
@@ -18,7 +19,11 @@
 					name="submittedUrl"
 					required
 				/>
-				<button type="submit" class="btn btn-warning">
+				<button
+					type="submit"
+					class="btn btn-warning"
+					id="submitUrlButton"
+				>
 					Submit URL
 				</button>
 			</div>
@@ -34,8 +39,22 @@
 	const submittedUrl = document.getElementById('submittedUrl');
 
 	submittedUrl.addEventListener('input', () => {
-		console.log(submittedUrl.value);
 		submittedUrl.value = submittedUrl.value.replace(/^(https?:\/\/)?/i, '');
+	});
+
+	const submitUrlButton = document.getElementById('submitUrlButton');
+	const submitUrlForm = document.getElementById('submitUrlForm');
+	submitUrlForm.addEventListener('submit', () => {
+		submitUrlButton.disabled = true;
+
+		submitUrlButton.innerHTML = `
+		<div class="spinner-spin">
+			<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="8" cy="8" r="7"></circle>
+			</svg>
+		</div>
+		<span>Loading...</span>
+		`;
 	});
 </script>
 

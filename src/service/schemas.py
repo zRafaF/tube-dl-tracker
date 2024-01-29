@@ -33,10 +33,3 @@ class GlobalsBase(BaseModel):
     demo_mode: bool = Field(..., example=True)
     app_version: str = Field(..., example="0.1.0")
     yt_dlp_version: str = Field(..., example="0.1.0")
-
-
-class PlaylistBase(BaseModel):
-    id: str = Field(...)
-    title: str = Field(...)
-    url: str = Field(...)
-    thumbnail_url: str = Field(...)

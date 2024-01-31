@@ -1,13 +1,18 @@
 {% extends 'base.j2' %} {% block content %} {% if playlist is defined %}
 <form>
-	<div class="card grid overflow-auto" style="height: 80dvh">
-		<div class="d-lg-flex justify-content-between">
-			<div class="d-flex flex-column p-3 p-md-4 w-100">
+	<div class="card grid overflow-auto">
+		<div>
+			<div class="d-flex flex-column p-3 p-md-4 pb-6 w-100">
 				<h2 class="fw-semibold fs-2 mx-auto mb-2">
 					{{ playlist.title }}
 				</h2>
-				<div class="d-flex flex-column flex-sm-row w-100 gap-3">
-					<a href="{{ playlist.url }}" class="w-100 w-sm-50 d-flex">
+				<div
+					class="d-flex flex-column flex-sm-row w-100 gap-3 justify-content-around"
+				>
+					<a
+						href="{{ playlist.url }}"
+						class="min-w-min min-w-sm-fit w-sm-50 d-flex"
+					>
 						<img
 							src="{{ playlist.thumbnails[0].url }}"
 							class="img-fluid mx-auto mx-sm-0"
@@ -15,8 +20,8 @@
 							style="object-fit: contain"
 						/>
 					</a>
-					<div class="w-100 w-sm-75">
-						<div class="row mb-4 mx-auto">
+					<div class="w-100 w-sm-75 max-w-fit mx-auto mx-sm-0">
+						<div class="row mb-4 mx-auto max-w-xs">
 							<label
 								for="inputEmail3"
 								class="col-sm-2 col-form-label px-0"
@@ -40,7 +45,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row mb-4 mx-auto">
+						<div class="row mb-4 mx-auto max-w-xs">
 							<label
 								for="inputEmail3"
 								class="col-sm-2 col-form-label px-0"
@@ -74,18 +79,13 @@
 				</div>
 			</div>
 
-			<div
-				class="bg-dark-subtle min-h-sm-100"
-				style="min-height: calc(80dvh - 2px)"
-			>
-				<div class="p-3 pb-0">
+			<div class="bg-dark-subtle p-3 p-md-4">
+				<div class="pb-2">
 					<h4 class="fw-semibold">
 						Found: {{ playlist.videos | length }} videos
 					</h4>
 				</div>
-				<div
-					class="d-flex gap-3 p-3 flex-row flex-lg-column overflow-auto"
-				>
+				<div class="d-flex gap-3 flex-row overflow-auto flex-wrap">
 					{% for video in playlist.videos %}
 					<a href="{{ video.url }}" target="_blank">
 						<div style="min-width: 200px; width: 200px">

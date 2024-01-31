@@ -2,6 +2,7 @@
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
+from config.schemas import QualityPresetsBase
 from .schemas import GlobalsBase, PagesBase
 from importlib.metadata import version
 
@@ -16,4 +17,5 @@ GLOBALS = GlobalsBase(
     demo_mode=False,
     app_version="0.1.0",
     yt_dlp_version=version("yt_dlp"),
+    availableQualities=list(QualityPresetsBase.__members__.values()),
 )

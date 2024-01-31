@@ -46,6 +46,61 @@
 				</div>
 			</div>
 		</div>
+		<div class="row mb-3">
+			<label for="maxComments" class="col-sm-3 col-form-label"
+				>Maximum comments</label
+			>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<input
+						id="maxComments"
+						name="maxComments"
+						type="number"
+						min="0"
+						class="form-control"
+						placeholder="Check for changes every"
+						aria-label="Check for changes every"
+						step="1"
+						value="{{ config.maxComments if config is defined }}"
+					/>
+					<span class="input-group-text" id="basic-addon2"
+						>comments</span
+					>
+				</div>
+				<div id="maxCommentsHelp" class="form-text">
+					Maximum number of comments that will be downloaded per
+					video.
+				</div>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label for="preferredQuality" class="col-sm-3 col-form-label"
+				>Preferred quality</label
+			>
+
+			<div class="col-sm-8">
+				<select
+					class="form-select"
+					name="preferredQuality"
+					aria-label="Default select example"
+				>
+					{% for quality in globals.availableQualities %}
+					<option
+						value="{{ quality.value }}"
+						{% if config.preferredQuality == quality.value %}
+						selected
+						{% endif %}
+						
+					>
+						{{ quality.value }}
+					</option>
+					{% endfor %}
+				</select>
+				<div id="preferredQualityHelpBlock" class="form-text">
+					The app will try to match this quality when downloading.
+				</div>
+			</div>
+		</div>
 
 		<button type="submit" class="btn btn-primary">Save</button>
 	</form>

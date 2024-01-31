@@ -14,7 +14,7 @@ class Messenger:
         self._last_message_id = 0
 
     async def _remove_message(self, message_id: int) -> None:
-        await asyncio.sleep(2)
+        await asyncio.sleep(1)
         for message in self._globals.messages:
             if message.id == message_id:
                 self._globals.messages.remove(message)

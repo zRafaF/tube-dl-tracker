@@ -53,10 +53,19 @@ async def get_settings(request: Request):
 
 @app_fastapi.post("/settings", response_class=RedirectResponse)
 async def post_settings(
-    request: Request, downloadsPath: str = Form(...), updateFrequency: str = Form(...)
+    request: Request,
+    downloadsPath: str = Form(...),
+    updateFrequency: str = Form(...),
+    maxComments: str = Form(...),
+    preferredQuality: str = Form(...),
 ):
     configurator.set_config(
-        ConfigBase(downloadsPath=downloadsPath, updateFrequency=float(updateFrequency))
+        ConfigBase(
+            downloadsPath=downloadsPath,
+            updateFrequency=float(updateFrequency),
+            maxComments=int(maxComments),
+            preferredQuality=preferredQuality,
+        )
     )
     messenger.send_message("Updated completed!", MessageType.SUCCESS)
 
@@ -76,7 +85,11 @@ async def get_items(request: Request, id: str):
     return templates.TemplateResponse(
         request=request,
         name="add-playlist.j2",
-        context={"current_page": "Add Playlist", "playlist": playlist},
+        context={
+            "current_page": "Add Playlist",
+            "playlist": playlist,
+            "config": configurator.get_config(),
+        },
     )
 
 

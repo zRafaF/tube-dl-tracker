@@ -4,4 +4,7 @@ site/
 **.pytest_cache
 logs/
 build/
-app-data/
+app-data/*
+!app-data/readme.md
+downloads/*
+!downloads/readme.md

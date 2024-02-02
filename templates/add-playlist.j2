@@ -1,5 +1,5 @@
 {% extends 'base.j2' %} {% block content %} {% if playlist is defined %}
-<form>
+<form method="POST" enctype="multipart/form-data">
 	<div class="card grid overflow-auto">
 		<div>
 			<div class="d-flex flex-column p-3 p-md-4 pb-6 w-100">
@@ -37,6 +37,7 @@
 					{% for quality in globals.availableQualities %}
 					<option
 						value="{{ quality.value }}"
+						
 						{% if config.preferredQuality == quality.value %}
 						selected
 						{% endif %}
@@ -46,7 +47,7 @@
 					</option>
 					{% endfor %}
 				</select>
-								<div id="passwordHelpBlock" class="form-text">
+								<div id="preferredQualityBlock" class="form-text">
 									Maximum download quality.
 								</div>
 							</div>
@@ -62,11 +63,13 @@
 								<select
 									class="form-select"
 									aria-label="Default select example"
+									name="trackerEnabled"
+
 								>
-									<option selected>Enabled</option>
-									<option value="1">Disabled</option>
+									<option selected value="True">Enabled</option>
+									<option value="False">Disabled</option>
 								</select>
-								<div id="passwordHelpBlock" class="form-text">
+								<div id="trackerEnabledHelpBlock" class="form-text">
 									Automated download of new entries.
 								</div>
 							</div>

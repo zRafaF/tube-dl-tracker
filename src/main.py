@@ -5,9 +5,9 @@
 
 from loguru import logger
 
-from service import api as service_api
-
 logger.add("logs/logs.log", retention=3, rotation="2 MB", level="INFO")
+
+from service import api as service_api
 
 import asyncio
 import uvicorn
@@ -18,6 +18,8 @@ from service import (
 from build import build_static, serve_static
 from service.globals import GLOBALS
 from config.arguments import args
+from database import db
+from ythandler import yt_handler
 
 if args.base_url:
     GLOBALS.base_url = args.base_url
@@ -37,6 +39,8 @@ if args.build == True or args.static == True:
 
 
 async def main():
+    logger.info("Starting database...")
+    db.start()
     logger.info("Starting server...")
     server = service_core.Server(
         config=uvicorn.Config(

@@ -19,10 +19,10 @@ class ConfigBase:
         self,
         downloadsPath: str = "/downloads",
         updateFrequency: float = 15.0,
-        maxComments: int = 500,
+        getComments: bool = True,
         preferredQuality: QualityPresetsBase = QualityPresetsBase.Q720P,
     ):
         self.downloadsPath = downloadsPath
         self.updateFrequency = updateFrequency
-        self.maxComments = maxComments
+        self.getComments = getComments
         self.preferredQuality = preferredQuality

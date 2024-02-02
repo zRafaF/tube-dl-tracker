@@ -56,14 +56,14 @@ async def post_settings(
     request: Request,
     downloadsPath: str = Form(...),
     updateFrequency: str = Form(...),
-    maxComments: str = Form(...),
+    getComments: bool = Form(False),
     preferredQuality: str = Form(...),
 ):
     configurator.set_config(
         ConfigBase(
             downloadsPath=downloadsPath,
             updateFrequency=float(updateFrequency),
-            maxComments=int(maxComments),
+            getComments=bool(getComments),
             preferredQuality=preferredQuality,
         )
     )
@@ -74,7 +74,7 @@ async def post_settings(
 
 
 @app_fastapi.get("/add-playlist/{id}", response_class=HTMLResponse)
-async def get_items(request: Request, id: str):
+async def get_add_playlist(request: Request, id: str):
     (playlist, execution_time) = yt_handler.get_playlist_info(id)
 
     messenger.send_message(
@@ -91,6 +91,21 @@ async def get_items(request: Request, id: str):
             "config": configurator.get_config(),
         },
     )
+
+
+@app_fastapi.post("/add-playlist/{id}", response_class=RedirectResponse)
+async def post_add_playlist(
+    request: Request,
+    id: str,
+    preferredQuality: str = Form(...),
+    trackerEnabled: bool = Form(...),
+):
+    messenger.send_message(
+        f"Playlist added successfully! Quality: {preferredQuality}, Tracker: {trackerEnabled}",
+        MessageType.SUCCESS,
+    )
+
+    return RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
 
 
 @app_fastapi.post("/api/submit-url", response_class=RedirectResponse)

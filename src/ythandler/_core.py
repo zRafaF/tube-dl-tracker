@@ -49,20 +49,20 @@ class YTHandler:
 
     @cache
     def get_video_info(
-        self, video_id: str, max_comments: int = 10
+        self, video_id: str, get_comments: bool = False
     ) -> RawExtractedVideoBase:
         start = time.time()
         asyncio.create_task(self._invalidate_cache())
         ydl_opts = {
-            "extract_flat": True,
             "verbose": True,
-            "getcomments": True,
-            "max_comments": max_comments,
+            "getcomments": get_comments,
         }
         with YoutubeDL(ydl_opts) as ydl:
             video_dict = ydl.extract_info(
-                self.generate_video_url(video_id), download=False
+                self.generate_video_url(video_id),
+                download=False,
             )
+            logger.info(video_dict)
             extracted_video = self._extracted_video_dict_to_obj(video_dict)
             end = time.time()
             logger.success(f"Fetched video data successfully, took {end-start}s")

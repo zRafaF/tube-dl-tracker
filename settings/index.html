@@ -278,7 +278,7 @@
 <div>
 	<h2 class="fw-semibold fs-2 mx-auto mb-6">Settings</h2>
 	<form method="POST" enctype="multipart/form-data">
-		<div class="row mb-3">
+		<div class="row mb-4">
 			<label for="downloadsPath" class="col-sm-3 col-form-label"
 				>Downloads Path</label
 			>
@@ -296,7 +296,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mb-3">
+		<div class="row mb-4">
 			<label for="updateFrequency" class="col-sm-3 col-form-label"
 				>Update Frequency</label
 			>
@@ -322,34 +322,22 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mb-3">
-			<label for="maxComments" class="col-sm-3 col-form-label"
-				>Maximum comments</label
+		<div class="row mb-4">
+			<label for="getComments" class="col-sm-3 col-form-label"
+				>Download comments</label
 			>
 			<div class="col-sm-8">
-				<div class="input-group">
-					<input
-						id="maxComments"
-						name="maxComments"
-						type="number"
-						min="0"
-						class="form-control"
-						placeholder="Check for changes every"
-						aria-label="Check for changes every"
-						step="1"
-						value="500"
+					<input class="getcomments-check-input" type="checkbox" value="True" name="getComments" id="getComments"  
+					
+					checked
+						
 					/>
-					<span class="input-group-text" id="basic-addon2"
-						>comments</span
-					>
-				</div>
-				<div id="maxCommentsHelp" class="form-text">
-					Maximum number of comments that will be downloaded per
-					video.
-				</div>
+					<label class="getcomments-check-label form-text" for="getComments">
+					  Downloads all comments (Doesn't keep track)
+					</label>				
 			</div>
 		</div>
-		<div class="row mb-3">
+		<div class="row mb-4">
 			<label for="preferredQuality" class="col-sm-3 col-form-label"
 				>Preferred quality</label
 			>
@@ -427,7 +415,7 @@
 <div>
 	<h2 class="fw-semibold fs-2 mx-auto mb-6">More options</h2>
 
-	<div class="row mb-3">
+	<div class="row mb-4">
 		<label for="updateFrequency" class="col-sm-3 col-form-label"
 			>Re-index</label
 		>
@@ -447,7 +435,7 @@
 <div>
 	<h2 class="fw-semibold fs-2 mx-auto mb-6">About</h2>
 
-	<div class="row mb-3">
+	<div class="row mb-4">
 		<label for="updateFrequency" class="col-sm-3 col-form-label"
 			>Tube DL Tracker version</label
 		>
@@ -457,7 +445,7 @@
 			DEMO 
 		</div>
 	</div>
-	<div class="row mb-3">
+	<div class="row mb-4">
 		<label for="updateFrequency" class="col-sm-3 col-form-label"
 			><a href="https://github.com/yt-dlp/yt-dlp">yt_dlp</a>
 			version</label
